@@ -1,4 +1,5 @@
 require './spec/spec_helper'
+require 'csv'
 
 class Input
   attr_reader :items
@@ -49,4 +50,37 @@ class Input
     end
   end
 
+#   sums = CSV.readlines(in_file_path).map do |num1, num2|
+#   num1.to_i + num2.to_i
+# end
+
+# # Write the result to a file
+# CSV.open(out_file_path, "wb") do |csv|
+#   sums.each { |sum| csv << [sum] }
+# end
+
+  # def populate(filename)
+  #   CSV.foreach(filename, headers: true,header_converters: :symbol) do |row|
+  #     @all << Item.new(row, self)
+  #   end
+  # end
+
+
+  def read_file(filename)
+    cart = []
+    csv_contents = CSV.read(filename)
+    csv_contents.shift
+    csv_contents.each do |row|
+      row.each do |detail|
+        detail.strip!
+      end
+      cart << row
+    end
+    cart
+  end
+
 end
+
+
+
+
