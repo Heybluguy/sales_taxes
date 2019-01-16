@@ -16,13 +16,14 @@ describe Input do
       file = @input.read_file('./cart.csv')
 
       expect(file.length).to be > 0
-      expect(file.first[1]).to be == "book"
+      expect(file.first[1]).to eq("book")
     end
 
-    it 'appends taxes' do
+    it 'converts csv rows to item ojects' do
       file = @input.read_file('./cart.csv')
-      @input
-      expect(file)
+      items = @input.convert_to_item(file)
+
+      expect(items.first).to be_instance_of(Item)
     end
   end
 

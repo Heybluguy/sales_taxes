@@ -50,6 +50,29 @@ class Input
     end
   end
 
+  def read_file(filename)
+    cart = []
+    csv_contents = CSV.read(filename)
+    csv_contents.shift
+    csv_contents.each do |row|
+      row.each do |detail|
+        detail.strip!
+      end
+      cart << row
+    end
+    cart
+  end
+
+  def convert_to_item(file)
+    items = []
+    file.map do |row|
+      items << Item.new(row[0].to_i, row[1], row[2].to_i)
+    end
+    items
+  end
+
+end
+
 #   sums = CSV.readlines(in_file_path).map do |num1, num2|
 #   num1.to_i + num2.to_i
 # end
@@ -64,23 +87,6 @@ class Input
   #     @all << Item.new(row, self)
   #   end
   # end
-
-
-  def read_file(filename)
-    cart = []
-    csv_contents = CSV.read(filename)
-    csv_contents.shift
-    csv_contents.each do |row|
-      row.each do |detail|
-        detail.strip!
-      end
-      cart << row
-    end
-    cart
-  end
-
-end
-
 
 
 
